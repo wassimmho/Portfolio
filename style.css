@@ -92,23 +92,36 @@ header nav ul li a:hover {
 }
 
 .hero h1 {
-    font-size: 5em; 
+    /* font-size: 5em; */ 
+    font-size: 4em; /* Reduced font size */
     font-weight: bold;
     margin: 0;
     line-height: 1.1;
     color: #f0f0f0; 
     position: relative; 
-    display: inline-block; 
+    display: block; /* Force each title onto its own line */
     z-index: 1; 
 }
 
-.hero-title h1:first-child::after {
+/* Style the span inside the first h1 */
+.hero-title h1:first-child span {
+    display: inline; /* Allow pseudo-element relative to text width */
+    position: relative; /* For pseudo-element positioning */
+}
+
+/* Highlighter effect for the SPAN inside the first h1 */
+/* .hero-title h1:first-child::after { */
+.hero-title h1:first-child span::after {
     content: '';
     position: absolute;
-    bottom: 10px; 
-    left: -5px; 
-    right: -5px; 
-    height: 8px; 
+    /* bottom: 10px; */ 
+    bottom: 0.15em; /* Position relative to font size */
+    /* left: -5px; */ 
+    left: -0.1em; /* Offset relative to font size */
+    /* right: -5px; */ 
+    right: -0.1em; /* Offset relative to font size */
+    /* height: 8px; */ 
+    height: 0.25em; /* Thickness relative to font size */
     background-color: #097c99; 
     z-index: -1; 
     border-radius: 3px; 
@@ -178,9 +191,9 @@ header nav ul li a:hover {
 }
 
 .secondary-card {
-    top: 240px; 
+    top: 270px;
     
-    height: auto; 
+    height: auto;
     padding: 20px 25px; 
 }
 
@@ -271,7 +284,7 @@ footer {
     background-color: #1a1a1a;
     color: #aaa;
     padding: 20px 0;
-    margin-top: 50px; 
+    margin-top: 80px;
     font-size: 0.9em;
 }
 
@@ -375,6 +388,8 @@ footer .container {
     overflow: hidden; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; 
+    flex-direction: column; 
 }
 
 .project-item:hover {
@@ -384,39 +399,67 @@ footer .container {
 
 .project-item img {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
+    height: 250px;
+    object-fit: cover;
     display: block;
 }
 
+.project-text-content {
+    padding: 15px 20px 0 20px;
+    flex-grow: 1;
+}
+
 .project-item h3 {
-    margin: 15px 20px 10px 20px;
+    margin: 0 0 10px 0;
     color: #1a1a1a;
 }
 
 .project-item p {
-    margin: 0 20px 15px 20px;
+    margin: 0 0 15px 0;
     font-size: 0.95em;
     color: #555;
     line-height: 1.6;
 }
 
+.project-tags {
+    margin: 0 0 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
 .project-links {
     margin: 0 20px 20px 20px;
     display: flex;
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .project-links a {
-    color: #0d2a4a;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
     font-weight: bold;
-    font-size: 0.9em;
-    text-decoration: underline;
-    transition: color 0.3s ease;
+    font-size: 0.85em;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #1a1a1a;
 }
 
 .project-links a:hover {
-    color: #26c6da;
+    background-color: #fff;
+    color: #1a1a1a;
 }
 
 #contact {
@@ -481,16 +524,194 @@ footer .container {
 .github-link {}
 .dribbble-link {}
 
-footer {
-    background-color: #1a1a1a;
-    color: #aaa;
-    padding: 20px 0;
-    margin-top: 50px; 
-    font-size: 0.9em;
+/* --- Responsive Design --- */
+
+/* Tablets and smaller - Adjusted Breakpoint */
+@media (max-width: 1050px) {
+    .hero .container {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        text-align: center; /* Center hero text */
+    }
+
+    .hero-text-content {
+        width: 100%;
+    }
+
+    .hero h1 {
+        /* font-size: 4em; */
+        font-size: 3.5em; /* Reduced proportionally */
+    }
+
+    .hero-description {
+        align-items: center; /* Center description paragraphs */
+    }
+    
+    .hero-description p {
+        max-width: 80%; /* Adjust width */
+    }
+
+    .hero-card {
+        position: relative; /* Remove absolute positioning */
+        top: auto;
+        right: auto;
+        width: 70%; /* Adjust width */
+        max-width: 400px; /* Optional max width */
+        margin: 40px auto 0 auto; /* Center card below text */
+        /* width: 220px; */
+        /* right: 30px; */
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .secondary-card {
+        /* top: 230px; /* Re-adjust gap */
+        top: auto;
+        margin-top: 20px; /* Spacing below first card */
+        width: 70%; /* Match first card */
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
 }
 
-footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Intermediate size adjustment */
+@media (max-width: 780px) {
+    .hero h1 {
+        font-size: 3.2em; /* Intermediate size */
+    }
+
+    #about h2, #languages h2, #work h2, #contact h2 {
+        font-size: 2.2em; /* Intermediate size */
+    }
+
+    .hero-card {
+        /* Optional: Further adjust card position/size here if needed */
+    }
+    .secondary-card {
+        /* Optional: Further adjust card position/size here if needed */
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+    }
+
+    header nav ul li {
+        margin-left: 0;
+    }
+
+    .hero {
+        padding: 40px 0;
+    }
+
+    .hero .container {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        text-align: center; /* Center hero text */
+    }
+
+    .hero-text-content {
+        width: 100%;
+    }
+
+    .hero h1 {
+        /* font-size: 3em; */
+        font-size: 2.5em; /* Reduced proportionally */
+        display: block; /* Allow full width */
+    }
+
+    .hero-title h1:first-child::after {
+        left: 50%; /* Center highlight */
+        right: auto;
+        transform: translateX(-50%);
+        width: 80%; /* Adjust width */
+        bottom: 0.1em; /* Adjusted bottom offset */
+    }
+
+    .hero-description {
+        align-items: center; /* Center description paragraphs */
+        text-align: center;
+    }
+
+    .hero-description p {
+        max-width: 90%; /* Allow paragraphs to take more width */
+    }
+
+    .cta-link {
+        margin-top: 20px;
+    }
+
+    .hero-card {
+        position: relative; /* Remove absolute positioning */
+        top: auto;
+        right: auto;
+        width: 80%;
+        max-width: 300px; /* Max width for cards */
+        margin: 30px auto 0 auto; /* Center cards below text */
+        text-align: center;
+        padding: 25px;
+    }
+
+    .secondary-card {
+        top: auto; /* Remove fixed top */
+        margin-top: 20px; /* Spacing below first card */
+        padding: 15px;
+    }
+
+    #about, #languages, #work, #contact {
+        padding: 40px 0;
+    }
+
+    #about h2, #languages h2, #work h2, #contact h2 {
+        font-size: 2em;
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+
+    .project-links a {
+        width: 100%; /* Make button full width */
+        text-align: center; /* Center text in button */
+    }
+
+    .language-list li {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .contact-links-container {
+        gap: 15px;
+    }
+
+    .contact-link {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
+    }
+
+    #scrollToTopBtn {
+        width: 50px;
+        height: 50px;
+        right: 15px;
+        bottom: 15px;
+        font-size: 1.3em;
+    }
 } 
